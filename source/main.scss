@@ -1,0 +1,89 @@
+@use "config/reset";
+@use "config/variables";
+@use "sass:math";
+
+@mixin formUse() {
+    width: 100%;
+    border: none;
+    display: block;
+    margin: 24px auto;
+}
+
+@function textToEm($aimPixel, $contextPixel: 16px) {
+    @return math.div($aimPixel, $contextPixel)+em;
+}
+
+body {
+    background-color: variables.$mainColor;
+}
+
+header {
+    background-color: variables.$secondaryColor;
+    padding: 16px;
+
+    .container {
+        max-width: 1024px;
+        margin: 0 auto;
+        text-align: center;
+
+        h1 {
+            color: variables.$mainColor;
+        }
+    }
+}
+
+.form-container {
+    width: 100vw;
+    height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    form {
+        width: 100%;
+        max-width: 480px;
+
+        h2 {
+            color: variables.$secondaryColor;
+            font-size: textToEm(48px);
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            color: variables.$secondaryColor;
+        }
+
+        input {
+            @include formUse();
+
+            background-color: variables.$mainColor;
+            border-bottom: 2px solid variables.$secondaryColor;
+            height: 5vh;
+            text-align: center;
+
+            &:focus {
+                outline: none;
+                border-color: variables.$secondaryColor;
+                text-align: center;
+            }
+        }
+
+        button {
+            @include formUse();
+
+            padding: 10px 0;
+            font-weight: bold;
+            background-color: variables.$secondaryColor;
+            color: variables.$mainColor;
+            border-radius: 5px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: darken(variables.$mainColor, 50%);
+            }
+        }
+    }
+}
